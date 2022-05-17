@@ -1,1 +1,1 @@
-This is the result of read method: This is first text file., This is second text file.
+This is awesome : This is first text file., This is second text file.
