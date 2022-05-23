@@ -6,9 +6,11 @@ const app = express();
 //Setup static and middleware
 app.use(express.static("./public"));
 
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./navbar-app/index.html"));
-});
+//Index.html added to static assets
+//SSR
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "./navbar-app/index.html"));
+// });
 
 app.all("*", (req, res) => {
   res.status(404).send("Not Found");
