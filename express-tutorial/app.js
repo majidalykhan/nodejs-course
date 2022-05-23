@@ -1,13 +1,13 @@
 const express = require("express");
+const path = require("path");
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.status(200).send("Home Page");
-});
+//Setup static and middleware
+app.use(express.static("./public"));
 
-app.get("/about", (req, res) => {
-  res.status(200).send("About Page");
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./navbar-app/index.html"));
 });
 
 app.all("*", (req, res) => {
