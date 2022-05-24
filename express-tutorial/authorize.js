@@ -1,6 +1,12 @@
 const authorize = (req, res, next) => {
-  console.log("Authorize - Just an example of another middleware function");
-  next();
+  const { user } = req.query;
+
+  if (user === "mak") {
+    req.user = { name: "mak", id: 2 };
+    next();
+  } else {
+    res.status(401).send("Unauthorized");
+  }
 };
 
 module.exports = authorize;
