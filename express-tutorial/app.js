@@ -21,7 +21,6 @@ app.get("/api/products", (req, res) => {
 //Single product -- route params
 app.get("/api/products/:productID", (req, res) => {
   const { productID } = req.params;
-  
 
   const singleProduct = products.find(
     (product) => product.id === Number(productID)
@@ -32,6 +31,30 @@ app.get("/api/products/:productID", (req, res) => {
   }
 
   res.json(singleProduct);
+});
+
+//Query String
+
+app.get("/api/v1/query", (req, res) => {
+  const { search, limit } = req.query;
+
+  let sortedProducts = [...products];
+
+  if (search) {
+    sortedProducts = sortedProducts.filter((product) => {
+      return product.name.startsWith(search);
+    });
+  }
+
+  if (limit) {
+    sortedProducts = sortedProducts.slice(0, Number(limit));
+  }
+
+  if (sortedProducts < 1) {
+    return res.status(200).send("No products matched your search");
+  }
+
+  res.status(200).json(sortedProducts);
 });
 
 app.listen(5000, () => {
